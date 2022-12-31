@@ -4,6 +4,7 @@ require('./util/logger').integrate();
 const { Client, GatewayIntentBits, Partials } = require('discord.js');
 const eventsLoader = require('./loaders/events-loader');
 const commandsLoader = require('./loaders/commands-loader');
+const slashLoader = require('./loaders/slash-loader');
 
 process.on('uncaughtException', err => {
   console.log(err);
@@ -23,6 +24,7 @@ const client = new Client({
 });
 
 commandsLoader.load(client);
+slashLoader.load(client);
 eventsLoader.load(client);
 
 client.login(process.env.BOT_TOKEN).then(() => console.log(`Client logged in`));
